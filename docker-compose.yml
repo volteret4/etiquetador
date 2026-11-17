@@ -1,0 +1,11 @@
+# No es un servidor: cada orden es un «docker compose run --rm etiquetador <orden>».
+services:
+  etiquetador:
+    build: .
+    user: "${UID_GID:-1000:1000}"
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./data:/data
+      - ${MUSICA:?Pon en .env la carpeta de tu música (MUSICA)}:/music${MODO_MUSICA-:ro}
